@@ -51,6 +51,9 @@ Route::get('/danh-muc', [PostController::class, 'postByCategory'])->name('catego
 
 Route::get('/danh-muc/{slug}', [PostController::class, 'postByCategory'])->name('category.detail');
 
+Route::get('/search/post', [PostController::class, 'search'])->name('home.search');
+
+
 Route::prefix('auth')->group(function () {
     Route::post('/signin', [SigninController::class, 'signin'])->name('auth.signin');
 

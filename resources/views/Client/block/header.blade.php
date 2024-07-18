@@ -125,7 +125,7 @@
 
         <div class="row">
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo"><a href="index-001.html"><img
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo"><a href="{{ route('Client.home') }}"><img
                         src="{{ asset('blogs_theme/images/logo/logo.jpg') }}" alt="" class="img-responsive center-block"></a></div>
 
             <div class="col-lg-8 col-md-8 col-sm-8">
@@ -210,11 +210,12 @@
 
                                             <div class="searchform">
 
-                                                <form id="search">
+                                                <form id="search" action="{{ route('home.search') }}" method="get">
 
-                                                    <input type="text" class="s" id="s" placeholder="keywords...">
+                                                    <input type="text" name="keyword" class="s" id="s" placeholder="Nhập từ khóa">
 
-                                                    <button type="submit" class="s-btn"><i class="fa fa-search"></i>
+                                                    <button type="submit" class="s-btn">
+                                                        <i class="fa fa-search"></i>
                                                     </button>
 
                                                 </form>
