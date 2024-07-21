@@ -22,10 +22,10 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], funct
 // Admin
 Route::prefix('admin')->group(function () {
 
-    Route::get('/',                             [AdminHomeController::class, 'dashboard'])
+    Route::get('/', [AdminHomeController::class, 'dashboard'])
         ->name('Admin.home.dashboard');
 
-    Route::controller(                      AdminPostController::class)
+    Route::controller(AdminPostController::class)
         ->prefix('posts')
         ->name('posts.')
         ->group(function () {
@@ -53,6 +53,8 @@ Route::get('/danh-muc/{slug}', [PostController::class, 'postByCategory'])->name(
 
 Route::get('/search/post', [PostController::class, 'search'])->name('home.search');
 
+Route::get('/search/post', [PostController::class, 'search'])->name('home.search');
+
 
 Route::prefix('auth')->group(function () {
     Route::post('/signin', [SigninController::class, 'signin'])->name('auth.signin');
@@ -61,8 +63,8 @@ Route::prefix('auth')->group(function () {
 
     Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-    Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::get('/forgot_password', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
-    Route::post('/password/reset', [ResetPasswordController::class, 'showResetForm'])->name('password.update');
+    Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPasswordMail;
+use App\Models\PasswordResetToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -25,9 +26,12 @@ class ForgotPasswordController extends Controller
                 ], 401);
             }
 
-            $token = Str::random(30);
+            $token = Str::random(60);
 
-            $user->update(['remember_token' => $token]);
+            PasswordResetToken::updateOrInsert(
+                ['email' => $user->email],
+                ['token' => $token, 'created_at' => now()]
+            );
 
             Mail::to($user->email)->send(new ResetPasswordMail($token, $user->email));
 
@@ -43,4 +47,5 @@ class ForgotPasswordController extends Controller
             ], 500);
         }
     }
+
 }
